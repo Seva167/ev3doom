@@ -1,4 +1,6 @@
 # EV3DOOM
+![Photo](images/photo.jpg)
+![Screenshot](images/screenshot.png)
 
 **[Doomgeneric](https://github.com/ozkl/doomgeneric) based port to Mindstorms EV3 bricks running [EV3DEV](https://www.ev3dev.org)**
 
