@@ -1,0 +1,11 @@
+*.o
+*.obj
+*.DS_Store
+*.log
+*.user
+.vs/
+.vscode/
+Debug/
+Release/
+*.map
+ev3doom/ev3doom
