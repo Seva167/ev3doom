@@ -10,6 +10,16 @@
 4. Stop brickman ``$ sudo systemctl stop brickman``
 5. Run it on the brick via SSH! ``$ ./ev3doom``
 
+# Controls
+| Button         | Action            |
+|----------------|-------------------|
+| Up             | Move forwards/Use |
+| Down           | Move backwards    |
+| Left           | Turn left         |
+| Right          | Turn right        |
+| Central button | Enter             |
+| Side button    | Escape            |
+
 # Performance
 **It actually runs pretty good!**
 ## Overclocking
