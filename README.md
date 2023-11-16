@@ -10,10 +10,11 @@
 
 # Performance
 **It actually runs pretty good!**
-
-But dithering algorithm used for improving image quality has a bit of floats on non hardware accelerated system.
-
-You can disable it by passing ```CFLAGS+=-DNO_DITHER``` to make while building from source
+## Overclocking
+You can overclock the brick
+1. Edit /boot/flash/uEnv.txt
+2. Uncomment this line and increase frequency `cpufreq=456`
+3. Reboot
 
 # Building
 Install cross compiler (because compiling on the brick is painfully slow)
