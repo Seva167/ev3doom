@@ -7,14 +7,15 @@
 1. Download latest [release](https://github.com/Seva167/ev3doom/releases/latest)
 2. Copy your doom .wad file to the brick
 3. Copy executable file to the brick
-4. Run it on the brick via SSH! ``$ ./ev3doom``
+4. Stop brickman ``$ sudo systemctl stop brickman``
+5. Run it on the brick via SSH! ``$ ./ev3doom``
 
 # Performance
 **It actually runs pretty good!**
 ## Overclocking
 You can overclock the brick
 1. Edit /boot/flash/uEnv.txt
-2. Uncomment this line and increase frequency `cpufreq=456`
+2. Uncomment this line and increase frequency ``cpufreq=456``
 3. Reboot
 
 # Building
