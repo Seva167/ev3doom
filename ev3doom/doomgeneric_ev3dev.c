@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <stdio.h>
-#include <math.h>
+//#include <math.h>
 
 struct fb_var_screeninfo fbinfo;
 int fbfd;
@@ -48,17 +48,17 @@ void DG_Init()
     tempbuf = malloc(fb_size);
 }
 
-color bri_to_col(uint8_t num)
+inline color bri_to_col(uint8_t num)
 {
     color col;
     col.r = num;
     col.g = num;
     col.b = num;
-    col.a = 255;
+    //col.a = 255;
     return col;
 }
 
-int index_2d(int x, int y, int w)
+inline int index_2d(int x, int y, int w)
 {
     return x + y * w;
 }
@@ -83,7 +83,7 @@ void resize_nearest(color* target, color* source, int w1, int h1, int w2, int h2
 
             pixel.r = pixel.g;
             pixel.b = pixel.g;
-            pixel.a = 255;
+            //pixel.a = 255;
             target[index_2d(j, i, w2)] = pixel;
         }
         
@@ -99,26 +99,27 @@ void dither(color* target, int w, int h)
         {
             color pixel = target[index_2d(j, i, w)];
 
-            uint8_t quPixel = (uint8_t)(round((float)(pixel.g / 64.0f))) * 64;
+            //uint8_t quPixel = (uint8_t)(round((float)(pixel.g / 64.0f))) * 64;
+            uint8_t quPixel = (pixel.g >> 6) << 6;
 
             target[index_2d(j, i, w)] = bri_to_col(quPixel);
 
             int16_t qErr = pixel.g - quPixel;
 
             int index = index_2d(j+1, i, w);
-            uint8_t val = target[index].g + qErr * (7.0f/16.0f);
+            uint8_t val = target[index].g + (qErr >> 2);// * (7.0f/16.0f);
             target[index] = bri_to_col(val);
             
             index = index_2d(j-1, i+1, w);
-            val = target[index].g + qErr * (3.0f/16.0f);
+            val = target[index].g + qErr / 5;// * (3.0f/16.0f);
             target[index] = bri_to_col(val);
 
             index = index_2d(j, i+1, w);
-            val = target[index].g + qErr * (5.0f/16.0f);
+            val = target[index].g + qErr / 3;// * (5.0f/16.0f);
             target[index] = bri_to_col(val);
 
             index = index_2d(j+1, i+1, w);
-            val = target[index].g + qErr * (1.0f/16.0f);
+            val = target[index].g + (qErr >> 4);// * (1.0f/16.0f);
             target[index] = bri_to_col(val);
         }
     }
@@ -127,9 +128,7 @@ void dither(color* target, int w, int h)
 void DG_DrawFrame()
 {
     resize_nearest(tempbuf, (color*)DG_ScreenBuffer, DOOMGENERIC_RESX, DOOMGENERIC_RESY, fbinfo.xres, fbinfo.yres);
-#ifndef NO_DITHER
     dither(tempbuf, fbinfo.xres, fbinfo.yres);
-#endif
     memcpy(fbdata, tempbuf, fb_size);
 }
 
@@ -148,7 +147,7 @@ uint32_t DG_GetTicksMs()
     return (tp.tv_sec * 1000) + (tp.tv_usec / 1000);
 }
 
-char is_key(int key)
+inline char is_key(int key)
 {
     return !!(key_b[key/8] & (1<<(key % 8)));
 }
