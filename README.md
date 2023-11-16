@@ -1,4 +1,5 @@
 # EV3DOOM
+<img src="images/photo.jpg" alt="photo" width="400"/> <img src="images/screenshot.png" alt="screenshot"/>
 
 **[Doomgeneric](https://github.com/ozkl/doomgeneric) based port to Mindstorms EV3 bricks running [EV3DEV](https://www.ev3dev.org)**
 
